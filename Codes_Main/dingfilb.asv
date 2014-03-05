@@ -1,0 +1,52 @@
+clc
+clear all
+close all
+
+t = 0:0.001:2;        
+x = chirp(t,0,1,150); 
+
+for k=1:length(x)
+  n(k)=(rand-.5);
+  f(k)=x(k)+n(k);
+end
+
+% figure(1)
+% qwigner2(f)  
+
+p=fracft(f,.78);
+% figure(2)
+% qwigner2(p)  
+ 
+ q1=[zeros(1,61) ones(1,14) zeros(1,180)];
+w=p.*q1';
+% figure(3)
+% qwigner2(w)  
+ 
+s=fracft(w,-.78);
+% figure(4)
+% qwigner2(s)
+%%
+ p1=fracft(f,1.225);
+%  figure(6)
+%  qwigner2(p1)  
+
+q2=[zeros(1,180) ones(1,12) zeros(1,63)];
+ w1=p1.*q2';
+%  figure(5)
+%  qwigner2(w1)
+
+ s1=fracft(w1,-1.225);
+ S=s1+s;
+% figure(7)
+% qwigner2(S)
+
+
+
+ 
+ 
+figure(6)
+plot(real(S))
+figure(7)
+plot(real(f))
+figure(8)
+plot(real(x))

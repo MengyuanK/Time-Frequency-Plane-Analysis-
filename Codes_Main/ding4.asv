@@ -1,0 +1,26 @@
+clc
+clear all
+
+t=-5:.05:5;
+s=2.*cos(5.*t).*exp(-t.^2./10);
+n=.5.*exp(1i.*.23.*t.^2)+.5.*exp(1i.*.3.*t.^2+1i.*8.5.*t)+.5.*exp(1i.*.46.*t.^2-1i.*9.6.*t);
+s1=s+n;
+
+x=dFRT(length(t),-1.14);
+x1=s1*x;
+y1=frft(s1,-1.14);
+z1=cdpei(s1,-1.14);
+
+
+U=[ones(1,93) zeros(1,15) ones(1,93)];
+x2=x1.*U;
+y2=y1.*U';
+z2=z1.*U';
+
+figure(1)
+plot(fftshift(real(x2)))
+figure(2)
+plot(real(y2))
+figure(3)
+plot(real(z2))
+
